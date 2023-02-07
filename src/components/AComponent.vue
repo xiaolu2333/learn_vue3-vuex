@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import store from "@/store";
+// 不再需要导入 store，因为我们可以在 this.$store 中访问它
 
 export default {
   name: 'AComponent',
@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     storeCountState() {
-      return store.state.count;
+      return this.$store.state.count;
     }
   },
 }

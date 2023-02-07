@@ -6,8 +6,7 @@
 </template>
 
 <script>
-
-import store from "@/store";
+// 不再需要导入 store，因为我们可以在 this.$store 中访问它
 
 export default {
   name: 'CComponent',
@@ -17,12 +16,12 @@ export default {
   },
   computed: {
     storeCountState() {
-      return store.state.count;
+      return this.$store.state.count;
     }
   },
   methods: {
     changeStoreState() {
-      store.commit("decrement", 'CComponent')
+      this.$store.commit("decrement", 'CComponent')
       console.log(this.storeCountState)
     }
   }
