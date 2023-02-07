@@ -1,4 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+/* jshint esversion: 6 */
 
-createApp(App).mount('#app')
+import {createApp} from 'vue';
+import App from './App.vue';
+import store from './store/index.js';
+
+createApp(App).use(store).mount('#app');
