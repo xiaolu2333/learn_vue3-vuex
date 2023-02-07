@@ -1,36 +1,31 @@
 <template>
   <div>
     <div>
-      <p>{{ localDataComputed }}</p>
-      <p>{{ stateOne }}</p>
-      <p>{{ stateTwo }}</p>
-      <p>{{ stateThree }}</p>
+      <p>{{ stateMonetaryUnitCNY }}</p>
+      <p>=</p>
+      <p>{{ transCNY2USD }}</p>
     </div>
-    <span>AComponent: {{ count }}</span>
+    <span>AComponent: {{ stateCount }}</span>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'AComponent',
   data() {
     return {
-      localData: 'localData'
     }
   },
   computed: {
-    localDataComputed() {
-      return this.localData + 'localComputed'
+    stateCount() {
+      return this.$store.getters.getStateCount;
     },
-    // 使用对象展开运算符将此组件的计算属性“混入”到外部计算属性中
-    ...mapState({
-      count: state => state.count,
-      stateOne: state => state.stateOne,
-      stateTwo: state => state.stateTwo,
-      stateThree: state => state.stateThree
-    })
+    stateMonetaryUnitCNY() {
+      return this.$store.getters.getStateMonetaryUnitCNY;
+    },
+    transCNY2USD() {
+      return this.$store.getters.getStateMonetaryUnitCNY2USD;
+    },
   }
 }
 </script>
