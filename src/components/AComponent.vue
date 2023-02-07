@@ -1,20 +1,23 @@
 <template>
   <div>
-    <!-- 2，获取 state 中的状态 count 的数据 -->
-    <span>AComponent: {{ this.store.state.count }}</span>
+    <span>AComponent: {{ storeCountState }}</span>
   </div>
 </template>
 
 <script>
-import store from "@/store/index";
+import store from "@/store";
 
 export default {
   name: 'AComponent',
   data() {
     return {
-      store // 1，通过 $store 访问 store 对象
     }
-  }
+  },
+  computed: {
+    storeCountState() {
+      return store.state.count;
+    }
+  },
 }
 </script>
 

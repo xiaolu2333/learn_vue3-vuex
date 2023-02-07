@@ -6,20 +6,24 @@
 </template>
 
 <script>
-import store from "@/store/index";
+
+import store from "@/store";
 
 export default {
   name: 'CComponent',
   data() {
     return {
-      store
+    }
+  },
+  computed: {
+    storeCountState() {
+      return store.state.count;
     }
   },
   methods: {
     changeStoreState() {
-      // 通过 $store 访问 store 对象
-      this.$store.commit("decrement", 'CComponent')
-      console.log(this.$store.state.count)
+      store.commit("decrement", 'CComponent')
+      console.log(this.storeCountState)
     }
   }
 }

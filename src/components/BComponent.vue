@@ -6,20 +6,24 @@
 </template>
 
 <script>
-import store from "@/store/index";
+import store from "@/store";
 
 export default {
   name: 'BComponent',
   data() {
     return {
-      store
+    }
+  },
+  // 由于 Vuex 的状态存储是响应式的，从 store 实例中读取状态最简单的方法就是在 computed 计算属性中返回某个状态
+  computed: {
+    storeCountState() {
+      return store.state.count;
     }
   },
   methods: {
     changeStoreState() {
-      // 通过 $store 访问 store 对象
-      this.$store.commit("increment", 'BComponent') // 3，通过 commit 方法调用 mutation 中的 action，修改 state 中的状态
-      console.log(this.$store.state.count)  // 通过 state 属性访问 state 中的数据
+      store.commit("increment", 'BComponent')
+      console.log(this.storeCountState)
     }
   }
 }
