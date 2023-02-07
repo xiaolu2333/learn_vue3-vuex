@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <p>{{ localDataComputed }}</p>
       <p>{{ stateOne }}</p>
       <p>{{ stateTwo }}</p>
       <p>{{ stateThree }}</p>
@@ -16,18 +17,21 @@ export default {
   name: 'AComponent',
   data() {
     return {
+      localData: 'localData'
     }
   },
-  computed: mapState(
-      // 如果计算属性的名称与 state 的子节点名称相同时，则可以给 mapState 传一个字符串数组。
-      [
-        'count',  // map this.count to store.state.count
-        'stateOne',
-        'stateTwo',
-        'stateThree'
-      ]
-  )
-
+  computed: {
+    localDataComputed() {
+      return this.localData + 'localComputed'
+    },
+    // 使用对象展开运算符将此组件的计算属性“混入”到外部计算属性中
+    ...mapState({
+      count: state => state.count,
+      stateOne: state => state.stateOne,
+      stateTwo: state => state.stateTwo,
+      stateThree: state => state.stateThree
+    })
+  }
 }
 </script>
 
