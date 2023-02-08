@@ -1,47 +1,35 @@
 <template>
   <div>
-    <div>
-      <p>{{ getStateMonetaryUnitCNY }}</p>
-      <p>=</p>
-      <p>{{ getStateMonetaryUnitCNY2USDv2(this.exchangeRate) }}</p>
-    </div>
-    <span>AComponent: {{ getStateCount }}</span>
+    <p>AComponent: {{ stateCount }}</p>
+    <button @click="increaseStateCount">Increase</button>
+    <button @click="decreaseStateCount">Decrease</button>
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
 
 export default {
   name: 'AComponent',
   data() {
     return {
-      exchangeRate: 7.0
     }
   },
-
-  // 方式一，使用数组原样导入 getter
-  computed: mapGetters([
-    'getStateCount',
-    'getStateMonetaryUnitCNY',
-    'getStateMonetaryUnitCNY2USDv2'
-  ]),
-  // 方式二，使用对象展开运算符将 getter 混入 computed 对象中
-  // computed: {
-  //   ...mapGetters([
-  //     'getStateCount',
-  //     'getStateMonetaryUnitCNY',
-  //     'getStateMonetaryUnitCNY2USDv2'
-  //   ])
-  // },
-  // 方式三：使用别名
-  // computed: {
-  //   ...mapGetters({
-  //     count: 'getStateCount',  // 把 `this.count` 映射为 `this.$store.getters.getStateMonetaryUnitCNY`
-  //     monetaryUnitCNY: 'getStateMonetaryUnitCNY',
-  //     monetaryUnitCNY2USDv2: 'getStateMonetaryUnitCNY2USDv2'
-  //   })
-  // },
+  computed: {
+    stateCount() {
+      return this.$store.state.count;
+    },
+  },
+  methods: {
+    increaseStateCount() {
+      // 提交一个名为 increment 的 mutation 来修改状态
+      this.$store.commit("increment")
+      console.log(this.stateCount)
+    },
+    decreaseStateCount() {
+      this.$store.commit("decrement")
+      console.log(this.stateCount)
+    }
+  }
 }
 </script>
 
