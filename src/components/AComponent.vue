@@ -12,6 +12,10 @@ export default {
   name: 'AComponent',
   data() {
     return {
+      changeRange: {
+        increment: 1,
+        decrement: 1,
+      },
     }
   },
   computed: {
@@ -21,12 +25,22 @@ export default {
   },
   methods: {
     increaseStateCount() {
-      // 提交一个名为 increment 的 mutation 来修改状态
-      this.$store.commit("increment")
+      // 提交一个有载荷的名为 increment 的 mutation 来修改状态
+      this.$store.commit(
+          "increment",
+          {
+            amount: this.changeRange.increment,
+          }
+      )
       console.log(this.stateCount)
     },
     decreaseStateCount() {
-      this.$store.commit("decrement")
+      this.$store.commit(
+          "decrement",
+          {
+            amount: this.changeRange.decrement,
+          }
+      )
       console.log(this.stateCount)
     }
   }

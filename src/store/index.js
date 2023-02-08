@@ -15,13 +15,16 @@ const store = createStore({
     },
 
     mutations: {        // mutations 是一个对象，这个对象包含了我们的状态变更函数，这些函数就是我们的状态变更行为，这些函数接收两个参数，第一个参数是 state，第二个参数是 payload，payload 是我们提交状态变更函数时传递的参数
-        increment(state) {
+        // mutation 事件的载荷通常是一个对象，这样可以包含多个字段并记录更多的信息
+        increment(state, payload) {
             "use strict";
-            state.count++;
+            console.log("increased by " + payload.amount);
+            state.count += payload.amount;
         },
-        decrement(state) {
+        decrement(state, payload) {
             "use strict";
-            state.count--;
+            console.log("decreased by " + payload.amount);
+            state.count -= payload.amount;
         }
     }
 });
