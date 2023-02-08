@@ -28,7 +28,12 @@ const store = createStore({
         getStateMonetaryUnitCNY2USD(state, getters) {
             "use strict";
             return getters.getStateCount / 7 + " " + "USD";
-        }
+        },
+        // 让 getter 返回一个函数
+        getStateMonetaryUnitCNY2USDv2: (state, getters) => (exchangeRate) => {
+            "use strict";
+            return getters.getStateCount / exchangeRate + " " + "USD";
+        },
     },
 
     // mutations: {        // mutations 是一个对象，这个对象包含了我们的状态变更函数，这些函数就是我们的状态变更行为，这些函数接收两个参数，第一个参数是 state，第二个参数是 payload，payload 是我们提交状态变更函数时传递的参数

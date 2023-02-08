@@ -14,6 +14,7 @@ export default {
   name: 'AComponent',
   data() {
     return {
+      exchangeRate: 7.0
     }
   },
   computed: {
@@ -24,7 +25,8 @@ export default {
       return this.$store.getters.getStateMonetaryUnitCNY;
     },
     transCNY2USD() {
-      return this.$store.getters.getStateMonetaryUnitCNY2USD;
+      // 在调用 getter 时，传入额外的参数
+      return this.$store.getters.getStateMonetaryUnitCNY2USDv2(this.exchangeRate);
     },
   }
 }
