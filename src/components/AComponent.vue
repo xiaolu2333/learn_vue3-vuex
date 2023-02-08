@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { COUNT_INCREMENT_MUTATION, COUNT_DECREMENT_MUTATION } from "@/store/mutation-types";
 
 export default {
   name: 'AComponent',
@@ -25,10 +26,11 @@ export default {
   },
   methods: {
     increaseStateCount() {
-      // 提交一个有载荷的名为 increment 的 mutation 来修改状态
+      // 对象风格的提交方式
       this.$store.commit(
-          "increment",
           {
+            // 使用常量替代 Mutation 事件类型在各种 Flux 实现中是很常见的模式
+            type: COUNT_INCREMENT_MUTATION,
             amount: this.changeRange.increment,
           }
       )
@@ -36,8 +38,8 @@ export default {
     },
     decreaseStateCount() {
       this.$store.commit(
-          "decrement",
           {
+            type: COUNT_DECREMENT_MUTATION,
             amount: this.changeRange.decrement,
           }
       )

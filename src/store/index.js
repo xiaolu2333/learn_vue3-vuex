@@ -1,10 +1,11 @@
 /* jshint esversion: 6 */
 
 import {createStore} from 'vuex';
+import { COUNT_INCREMENT_MUTATION, COUNT_DECREMENT_MUTATION } from "@/store/mutation-types";
 
 // 创建一个新的 store 实例
 const store = createStore({
-    state() {           // state 是一个函数，返回一个对象，这个对象就是我们的状态树，这个对象可以包含任意的属性，这些属性就是我们的状态
+    state() {
         "use strict";
         return {
             count: 0,
@@ -14,14 +15,13 @@ const store = createStore({
         };
     },
 
-    mutations: {        // mutations 是一个对象，这个对象包含了我们的状态变更函数，这些函数就是我们的状态变更行为，这些函数接收两个参数，第一个参数是 state，第二个参数是 payload，payload 是我们提交状态变更函数时传递的参数
-        // mutation 事件的载荷通常是一个对象，这样可以包含多个字段并记录更多的信息
-        increment(state, payload) {
+    mutations: {
+        [COUNT_INCREMENT_MUTATION](state, payload) {
             "use strict";
             console.log("increased by " + payload.amount);
             state.count += payload.amount;
         },
-        decrement(state, payload) {
+        [COUNT_DECREMENT_MUTATION](state, payload) {
             "use strict";
             console.log("decreased by " + payload.amount);
             state.count -= payload.amount;
