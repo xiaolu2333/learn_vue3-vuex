@@ -2,13 +2,13 @@
   <div>
     <p>AComponent: {{ stateCount }}</p>
     <button @click="increment({ amount: this.changeRange.increment })">IncreaseByMutation</button>
-    <button @click="decrementCount">DecreaseByAction</button>
+    <button @click="decrement({ amount: this.changeRange.increment })">DecreaseByAction</button>
   </div>
 </template>
 
 <script>
-import { COUNT_INCREMENT_MUTATION, COUNT_DECREMENT_MUTATION } from "@/store/mutation-types";
-import {mapMutations} from "vuex";
+import { COUNT_INCREMENT_MUTATION } from "@/store/mutation-types";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   name: 'AComponent',
@@ -29,13 +29,14 @@ export default {
     // 将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）
     ...mapMutations([
         COUNT_INCREMENT_MUTATION, // COUNT_INCREMENT_MUTATION 将被映射为 `this.$store.commit('increment')`
-        COUNT_DECREMENT_MUTATION,
     ]),
 
-    decrementCount() {
-      // 添加了载荷与 `this.$store.commit('decrement', { amount: this.changeRange.decrement })` 等效
-      this.$store.dispatch("decrement", { amount: this.changeRange.decrement });
-    }
+    ...mapActions([
+      'decrement', // 将 `this.decrement(amount)` 映射为 `this.$store.dispatch('decrement', amount)`
+    ]),
+    ...mapActions({
+      subs: 'decrement' // 将 `this.subs()` 映射为 `this.$store.dispatch('decrement')`
+    })
   }
 }
 </script>
